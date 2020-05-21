@@ -9,6 +9,13 @@ module.exports = {
         publicPath:'/dist/',
         filename:'js/main.js'
     },
+    resolve:{
+        alias:{
+            static: path.resolve(__dirname,"src/static"),
+            page: path.resolve(__dirname,"src/page"),
+            component:path.resolve(__dirname,"src/component")
+        }
+    },
     module:{
         rules:[{
             test:/.jsx$/,
@@ -62,6 +69,9 @@ module.exports = {
         })
     ],
     devServer:{
-        
+        port:8080,
+        historyApiFallback:{
+            index:"/dist/index.html"
+        }
     }
 }
