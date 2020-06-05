@@ -13,7 +13,9 @@ module.exports = {
         alias:{
             static: path.resolve(__dirname,"src/static"),
             page: path.resolve(__dirname,"src/page"),
-            component:path.resolve(__dirname,"src/component")
+            component:path.resolve(__dirname,"src/component"),
+            util:path.resolve(__dirname,"src/util"),
+            service:path.resolve(__dirname,"src/service")
         }
     },
     module:{
@@ -31,6 +33,12 @@ module.exports = {
             use:ExtractTextPlugin.extract({
                 fallback:'style-loader',
                 use:'css-loader'
+            })
+        },{
+            test:/\.less$/,
+            use:ExtractTextPlugin.extract({
+                fallback:'style-loader',
+                use:['css-loader','less-loader']
             })
         },{
             test:/\.scss$/,
@@ -60,7 +68,8 @@ module.exports = {
     },
     plugins:[
         new HtmlWebpackPlugin({
-            template:'./src/index.html'
+            template:'./src/index.html',
+            favicon:'./favicon.ico'
         }),
         new ExtractTextPlugin("css/[name].css"),
         new webpack.optimize.CommonsChunkPlugin({
@@ -72,6 +81,15 @@ module.exports = {
         port:8080,
         historyApiFallback:{
             index:"/dist/index.html"
+        },
+        proxy:{
+            "/api":{
+                target :"http://admintest.happymmall.com/",
+                changeOrigin:true,
+                pathRewrite:{
+                    '^/api':""
+                }
+            }
         }
     }
 }

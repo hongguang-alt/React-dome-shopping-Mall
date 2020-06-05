@@ -1,0 +1,22 @@
+a.content{
+    text-align: center;
+    padding:10px;
+    text-decoration: none;
+    display: block;
+    opacity: 0.8;
+    transition: all .3s;
+}
+a.content:hover{
+    opacity: 1;
+    color:beige;
+    transform: scale(1.08);
+}
+p .fa{
+    margin-right:5px;
+}
+.content p{
+    padding:0;
+}
+.title{
+    font-size:75px;
+}
